@@ -24,8 +24,15 @@ public class AccountController {
 	@Autowired
 	private AccountService studentService;
 	
+	@RequestMapping("/index")
+	public String setupForm(Map<String, Object> map){
+		Account student = new Account();
+		map.put("student", student);
+		map.put("studentList", studentService.getAllStudent());
+		return "student";
+	}
 	
-		@RequestMapping(value="/saveData/{socmedia}/{sid}/{email}" , method = RequestMethod.POST)
+		@RequestMapping(value="/saveFb/{socmedia}/{sid}/{email}" , method = RequestMethod.POST)
 		@ResponseBody
 		public ResponseEntity<Account> addAccount(@PathVariable("socmedia")String socialmedia ,@PathVariable("sid") int aid ,@PathVariable("email") String emailId)
 		{
